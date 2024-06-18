@@ -151,4 +151,15 @@ exports.getCombinedData = async (req, res) => {
             this.getStatistics(req, res),
             this.getBarChart(req, res),
             this.getPieChart(req, res)
-        ])
+        ]);
+        res.status(200).json({
+            transactions,
+            statistics,
+            barChart,
+            pieChart
+        });
+    } catch (error) {
+        console.error(error); // Log error
+        res.status(500).send('Error fetching combined data');
+    }
+};
