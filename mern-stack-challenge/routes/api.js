@@ -1,13 +1,24 @@
 const express = require('express');
-const { initializeDatabase, listTransactions, getStatistics, getBarChart, getPieChart, getCombinedData } = require('../controllers/transactionController');
+const router = express.Router(); // Initialize router
+const transactionController = require('../controllers/transactionController');
 
-const router = express.Router();
+// Route to initialize database
+router.get('/initialize', transactionController.initializeDB);
 
-router.get('/initialize', initializeDatabase);
-router.get('/transactions', listTransactions);
-router.get('/statistics', getStatistics);
-router.get('/barchart', getBarChart);
-router.get('/piechart', getPieChart);
-router.get('/combined', getCombinedData);
+// Route to list transactions
+router.get('/transactions', transactionController.listTransactions);
 
+// Route to get statistics
+router.get('/statistics', transactionController.getStatistics);
+
+// Route to get bar chart data
+router.get('/barchart', transactionController.getBarChart);
+
+// Route to get pie chart data
+router.get('/piechart', transactionController.getPieChart);
+
+// Route to get combined data from all APIs
+router.get('/combined', transactionController.getCombinedData);
+
+// Export router
 module.exports = router;
